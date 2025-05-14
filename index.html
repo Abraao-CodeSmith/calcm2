@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Metro Quadrado</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="calculadora">
+        <h1>Calculadora Metro Quadrado</h1>
+
+        <div class="campo">
+            <label for="largura">Largura</label>
+            <div class="input-com-unidade">
+                <input type="text" id="largura" placeholder="Ex: 2,5">
+                <select id="unidadeLargura">
+                    <option value="m">m</option>
+                    <option value="cm">cm</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label for="altura">Altura</label>
+            <div class="input-com-unidade">
+                <input type="text" id="altura" placeholder="Ex: 1,5">
+                <select id="unidadeAltura">
+                    <option value="m">m</option>
+                    <option value="cm">cm</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" min="1" value="1">
+        </div>
+
+        <div class="campo">
+            <label for="valor">Valor por m²</label>
+            <input type="text" id="valor" placeholder="Ex: 45,00">
+        </div>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

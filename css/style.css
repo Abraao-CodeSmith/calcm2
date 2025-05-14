@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    background-image: url('/img/backmath.jpg');
+    /* URL da imagem */
+    background-size: cover;
+    /* cobre toda a tela */
+    background-position: center;
+    /* centraliza a imagem */
+    background-repeat: no-repeat;
+    /* evita repetição */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+.calculadora {
+    background-color: rgba(255, 221, 51, 0.7);
+    /* amarelo mais forte com transparência */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    text-align: center;
+}
+
+.calculadora h1 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.campo {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-com-unidade {
+    display: flex;
+    gap: 10px;
+}
+
+.input-com-unidade input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.input-com-unidade select {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #d49230;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.07);
+}
+
+#resultado {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.aviso {
+    color: red;
+    font-size: 14px;
+}
+
+/* Responsivo para celular */
+@media (max-width: 480px) {
+    .calculadora {
+        width: 100%;
+        height: 100dvh;
+        border-radius: 0;
+        padding: 20px;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+}
