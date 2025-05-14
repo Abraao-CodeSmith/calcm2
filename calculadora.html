@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Metro Quadrado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            margin: 0;
+            background-image: url('https://t4.ftcdn.net/jpg/10/70/28/87/360_F_1070288769_lO01wdaEFL9HJSePasb76N2DkBfzGvEQ.jpg');
+            /* URL da imagem */
+            background-size: cover;
+            /* cobre toda a tela */
+            background-position: center;
+            /* centraliza a imagem */
+            background-repeat: no-repeat;
+            /* evita repetição */
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+        }
+
+        .calculadora {
+            background-color: rgba(255, 221, 51, 0.7);
+            /* amarelo mais forte com transparência */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            text-align: center;
+        }
+
+        .calculadora h1 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .campo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-com-unidade {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-com-unidade input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        .input-com-unidade select {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #d49230;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.07);
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .aviso {
+            color: red;
+            font-size: 14px;
+        }
+
+        /* Responsivo para celular */
+        @media (max-width: 480px) {
+            .calculadora {
+                width: 100%;
+                height: 100dvh;
+                border-radius: 0;
+                padding: 20px;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculadora">
+        <h1>Calculadora Metro Quadrado</h1>
+
+        <div class="campo">
+            <label for="largura">Largura</label>
+            <div class="input-com-unidade">
+                <input type="text" id="largura" placeholder="Ex: 2,5">
+                <select id="unidadeLargura">
+                    <option value="m">m</option>
+                    <option value="cm">cm</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label for="altura">Altura</label>
+            <div class="input-com-unidade">
+                <input type="text" id="altura" placeholder="Ex: 1,5">
+                <select id="unidadeAltura">
+                    <option value="m">m</option>
+                    <option value="cm">cm</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" id="quantidade" min="1" value="1">
+        </div>
+
+        <div class="campo">
+            <label for="valor">Valor por m²</label>
+            <input type="text" id="valor" placeholder="Ex: 45,00">
+        </div>
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function parseNumero(valor) {
+            return parseFloat(valor.replace(',', '.'));
+        }
+
+        function calcular() {
+            const largura = parseNumero(document.getElementById('largura').value);
+            const altura = parseNumero(document.getElementById('altura').value);
+            const unidadeLargura = document.getElementById('unidadeLargura').value;
+            const unidadeAltura = document.getElementById('unidadeAltura').value;
+            const quantidade = parseInt(document.getElementById('quantidade').value);
+            const valorM2 = parseNumero(document.getElementById('valor').value);
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = '';
+
+            if (isNaN(largura) || largura < 0.01 || isNaN(altura) || altura < 0.01 || isNaN(quantidade) || quantidade < 1 || isNaN(valorM2) || valorM2 < 0) {
+                resultado.innerHTML = '<span class="aviso">Por favor, preencha todos os campos corretamente.</span>';
+                return;
+            }
+
+            const larguraEmMetros = unidadeLargura === 'cm' ? largura / 100 : largura;
+            const alturaEmMetros = unidadeAltura === 'cm' ? altura / 100 : altura;
+
+            let area = larguraEmMetros * alturaEmMetros;
+            let areaTotal = area * quantidade;
+            let valorFinal;
+
+            let mensagem = `Área total: ${areaTotal.toFixed(2).replace('.', ',')} m²<br>`;
+
+            if (areaTotal < 0.5) {
+                valorFinal = 0.5 * valorM2;
+                mensagem += '<span class="aviso">Metragem mínima de 0,5 m² aplicada.</span><br>';
+                mensagem += `Valor final: R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
+            } else {
+                valorFinal = areaTotal * valorM2;
+                mensagem += `Valor final: R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
+            }
+
+            resultado.innerHTML = mensagem;
+        }
+    </script>
+</body>
+
+</html>
